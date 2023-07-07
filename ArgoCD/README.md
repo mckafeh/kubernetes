@@ -48,9 +48,9 @@ Replace <node-ip> with the IP address of the Kubernetes node, and <node-port> wi
 The default username and password for ArgoCD is admin and password. To login, navigate to the ArgoCD UI and enter these credentials.
 or you could pull the secret to get the password as outlined below.
 
-'''
+```
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode && echo
-'''
+```
 
 
 
