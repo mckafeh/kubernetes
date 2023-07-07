@@ -1,15 +1,13 @@
-
-
-![Argo]ArgoCD\argo_setup.webp
+![Alt image](ArgoCD/argo_setup.webp)
 # Introduction
  Argocd is a declarative,GitOps continuous deployment tool that you can use to deploy and managed applications on a Kubernetes cluster.
  In this article, we will install ArgoCD on Kubernetes cluster and deploy an application from a GitHub repository using ArgoCD.
 
 # Prerequisites
-. A running Kubernetes cluster
-. kubectl CLI tool installed and configured to access your cluster
-. A Git repository that contains your deploment yaml code in this case I'm using github.
-. A container registry such as Docker Hub or Google Container Registry (GCR) to store your container images.
+- A running Kubernetes cluster
+- kubectl CLI tool installed and configured to access your cluster
+- A Git repository that contains your deploment yaml code in this case I'm using github.
+- A container registry such as Docker Hub or Google Container Registry (GCR) to store your container images.
 
 # install ArgoCD in k8s
 
@@ -23,7 +21,7 @@ This will create a new namespace called argocd and install the latest version of
 
 #  Access the ArgoCD UI
 
- By default, the Argo CD UI is not exposed externally. To access the UI, you can create a Kubernetes service of type LoadBalancer or NodePort, or you can use port forwarding to access it locally from your cluster node
+ By default, the Argo CD UI is not exposed externally. To access the UI, you can create a Kubernetes service of type LoadBalancer or NodePort, or you can use port forwarding to access it locally from your cluster node, in our case we will be using a service to access.
 
 ```
 kubectl get svc -n argocd
