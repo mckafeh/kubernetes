@@ -18,7 +18,7 @@ To install ArgoCD using kubectl, run the following command:
 ```
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-```'
+```
 This will create a new namespace called argocd and install the latest version of ArgoCD on your cluster.
 
 #  Access the ArgoCD UI
