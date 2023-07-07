@@ -1,4 +1,4 @@
-![Alt image](ArgoCD/argo_setup.webp)
+![ReadMe image](ArgoCD/argo_setup.png)
 # Introduction
  Argocd is a declarative,GitOps continuous deployment tool that you can use to deploy and managed applications on a Kubernetes cluster.
  In this article, we will install ArgoCD on Kubernetes cluster and deploy an application from a GitHub repository using ArgoCD.
