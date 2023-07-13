@@ -1,3 +1,5 @@
+## How install and deploy Argocd a Kubernetes cluster
+
 ![ReadMe image](argo_setup.png)
 
 # Introduction
@@ -27,20 +29,32 @@ This will create a new namespace called argocd and install the latest version of
 
 By default, the Argo CD UI is not exposed externally. To access the UI, you can create a Kubernetes service of type LoadBalancer or NodePort, or you can use port forwarding to access it locally from your cluster node, in our case we will be using a service to access.
 
-```
-kubectl get svc -n argocd
-kubectl apply -n argocd -f argocd-ui-service.yaml
-```
+Argo CD's API server is exposed as a ClusterIP service. To access it via a NodePort service, you can modify the service type.
 
-This will create a NodePort service named argocd-server in the argocd namespace. The service will be exposed on a high port number (e.g., 30007), which can be accessed on any Kubernetes node in your cluster.
+a. Edit the service:
+```
+kubectl edit svc argocd-server -n argocd
+```
+b. Change the service type from ClusterIP to NodePort:
+```...
+spec:
+  ...
+  type: NodePort
+  ...
+```
+Get the NodePort port number:
+```
+kubectl get svc argocd-server -n argocd
+```
+Note down the port number associated with the argocd-server service.
 
-To access the Argo CD UI, you need to determine the IP address of any of your Kubernetes nodes. You can use the following command to find the IP address:
+To Access Argo CD UI: You can now access the Argo CD UI using the NodePort service.
 
 ```
 kubectl get nodes -o wide
 ```
 
-Look for the External-IP or Internal-IP column to find the IP address of a node.
+Look for the External-IP column to find the IP address of a node.
 Once you have the IP address and the NodePort value (e.g., 30007), you can access the Argo CD UI in a web browser using the following URL:
 
 ```
@@ -60,7 +74,7 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 
 # Create a new Application
 
-Once you are logged in, you can create a new application in ArgoCD. Click on the + New App button on the top right corner of the UI. This will open a form where you can specify the details of your application or you rollout the application.yaml to your cluster to create a new application.
+Once you are logged in, you can create a new application in ArgoCD. Click on the + New App button on the top right corner of the UI. This will open a form where you can specify the details of your application or you can rollout an application via the cli
 
 In the General tab, specify the following details:
 
@@ -87,3 +101,11 @@ Once you have created your application, ArgoCD will automatically start syncing 
 # Rolling out a New Version of your application
 
 To roll out a new version of your application, simply push your changes to your Git repository and ArgoCD will automatically detect the changes and sync your application with the new state.
+
+
+Refence:
+
+https://www.youtube.com/watch?v=MeU5_k9ssrs&t=1170s
+
+# Troubleshooting
+Admin user account password reset: https://stackoverflow.com/questions/68297354/what-is-the-default-password-of-argocd
