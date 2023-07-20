@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+labels:
+app: web-app-deployment
+name: web-app-deployment
+spec:
+replicas: 3
+selector:
+matchLabels:
+app: web-app
+template:
+metadata:
+labels:
+app: web-app
+spec:
+containers:
+- env:
+- name: DB_HOST
+value: mysql-service
+- name: DB_USER
+value: root
+- name: DB_PASSWORD
+value: password
+image: bmuschko/web-app:1.0.1
+name: web-app
+ports:
+- containerPort: 3000

@@ -1,0 +1,19 @@
+configMapGenerator:
+- name: db-config
+  files:
+   - config/db-config.properties
+secretGenerator:
+- name: db-creds
+  files:
+  - config/db-secret.properties
+
+namespace: persistence
+commonLabels:
+  team: helix
+resources:
+- web-app-deployment.yaml
+patchesStrategicMerge:
+- security-context.yaml
+
+- web-app-service.yaml
+
