@@ -1,4 +1,4 @@
-## How install and deploy Argocd a Kubernetes cluster
+## How to install and deploy Argocd on a Kubernetes cluster
 
 ![ReadMe image](argo_setup.png)
 
