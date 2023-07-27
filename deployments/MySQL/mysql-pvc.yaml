@@ -1,12 +1,12 @@
 ---
-kind: PersistentVolumeClaim
 apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
   name: mysql-pv-claim
 spec:
-  storageClassName: jenkins-sc
+  accessModes:
+  - ReadWriteMany
   resources:
     requests:
       storage: 2Gi
-  accessModes:
-    - ReadWriteMany
+  storageClassName: jenkins-sc
