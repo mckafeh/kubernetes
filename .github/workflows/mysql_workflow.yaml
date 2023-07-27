@@ -6,9 +6,10 @@ on:
 jobs:
   build:
     defaults:
+    # folder working directory.
      run:  working-directory: deployments/MySQL
      name: Build-job
-     runs-on: self-hosted
+     runs-on: self-hosted-runner
   steps:
    - name: Checkout
      uses: actions/checkout@v2
