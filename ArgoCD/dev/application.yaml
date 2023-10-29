@@ -21,3 +21,5 @@ spec:
     automated:
       selfHeal: true
       prune: true
+
+# Ref: https://medium.com/@nanditasahu031/getting-started-with-argocd-b5a02353e144

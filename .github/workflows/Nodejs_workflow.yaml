@@ -1,0 +1,34 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [frontend-develop]
+  pull_request:
+    branches: [frontend-develop]
+
+defaults:
+  run:
+    working-directory: ./deployments/web
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14"
+          cache: "npm"
+          cache-dependency-path: ./deployments/webpackage-lock.json`
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
+
+# Ref
+# https://dev.to/shofol/run-your-github-actions-jobs-from-a-specific-directory-1i9e
